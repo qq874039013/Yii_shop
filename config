@@ -1,0 +1,13 @@
+[core]
+	bare = true
+	repositoryformatversion = 0
+	filemode = false
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = https://github.com/qq874039013/Yii_shop.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+	pushurl = https://github.com/qq874039013/Yii_shop.git
+[user]
+	name = qq874039013
+	email = 13452914144@163.com
