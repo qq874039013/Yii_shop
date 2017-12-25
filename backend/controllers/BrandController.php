@@ -46,9 +46,9 @@ class BrandController extends Controller
      */
 //    声明一个显示数据的方法
     public function actionIndex(){
-       $model = Brand::find()->orderBy('sort');
+       $model = Brand::find()->orderBy('id')->where(['status'=>1]);
        $count = $model->count();
-       $pagination = new Pagination(['totalCount' => $count,'defaultPageSize' => 5]);
+       $pagination = new Pagination(['totalCount' => $count,'defaultPageSize' => 2]);
        $modelList = $model->offset($pagination->offset)->limit($pagination->limit)->all();
        return $this->render('index',['models'=>$modelList,'pagObj'=>$pagination]);
    }
@@ -57,6 +57,7 @@ class BrandController extends Controller
         $model = Brand::findOne($id);
         $oldImg = $model->logo;
         $request = new Request();
+//        判断文件是否更改
         if($request->isPost){
                $model->load($request->post());
                if($model->logo!==$oldImg){
@@ -73,6 +74,9 @@ class BrandController extends Controller
         }
         return $this->render('add',compact('model'));
     }
+    /*
+     *
+     */
 //    声明一个删除的方法
     public function actionDel($id)
     {
@@ -84,6 +88,7 @@ class BrandController extends Controller
           return $this->redirect(['index']);
         }
     }
+//    声明一个单独上传文件的方法
     public function actionUpload(){
          $img = UploadedFile::getInstanceByName('file');
         $path = "images/brand/".uniqid().".".$img->extension;
@@ -96,4 +101,24 @@ class BrandController extends Controller
             return json_encode($row);
         }
     }
+    /*
+     *
+     */
+//    声明一个方法用来加入回收站
+    public function actionAddTrash($id){
+        $model = Brand::findOne($id);
+        $model->status=!$model->status;
+        if ($model->save()) {
+            return $this->redirect(['index']);
+        }
+    }
+//    声明一个方法用来查看回收站
+    public function actionTrash(){
+        $model = Brand::find()->orderBy('id')->where(['status'=>0]);
+        $count = $model->count();
+        $pagination = new Pagination(['totalCount' => $count,'defaultPageSize' => 2]);
+        $modelList = $model->offset($pagination->offset)->limit($pagination->limit)->all();
+        return $this->render('index',['models'=>$modelList,'pagObj'=>$pagination]);
+    }
+
 }

@@ -16,6 +16,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'sort')->textInput(['value'=>100])?>
         <?= $form->field($model, 'status')->radioList(['0'=>'禁用','1'=>'激活'],['value'=>1])?>
     <?=$form->field($model, 'logo')->widget('manks\FileInput', [
+
     ]);?>
     <?php if($model->logo){
         echo \yii\bootstrap\Html::img($model->logo,['height'=>50]);
