@@ -3,14 +3,14 @@
     <tr>
         <td>编号</td>
         <td>文章名称</td>
-        <td>文章分类</td>
         <td>文章排序</td>
+        <td>文章状态</td>
         <td>文章简介</td>
-        <td>所属分类</td>
+        <td>文章分类</td>
         <td>创建时间</td>
         <td>操作</td>
     </tr>
-    <?php const STATUS=['下架','上架'];foreach ($models as $model):?>
+    <?php const STATUS=['隐藏','显示'];foreach ($models as $model):?>
         <td><?=$model->id?></td>
         <td><?=$model->name?></td>
         <td><?=$model->sort?></td>

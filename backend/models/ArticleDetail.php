@@ -36,8 +36,8 @@ class ArticleDetail extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'article_id' => 'Article ID',
-            'content' => 'Content',
+            'article_id' => '所属文章',
+            'content' => '文章内容',
         ];
     }
     public function getArticle(){

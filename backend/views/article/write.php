@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($cate, 'article_id')->dropDownList([$model->id=>$model->name]) ?>
-        <?= $form->field($cate, 'content')->textarea() ?>
+        <?=$form->field($cate,'content')->widget('kucha\ueditor\UEditor',[]);?>
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
         </div>

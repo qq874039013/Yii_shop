@@ -15,8 +15,6 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'status')->radioList([0=>'下架',1=>'上架'],['value'=>1]) ?>
         <?= $form->field($model, 'sort') ->textInput(['value'=>100])?>
         <?= $form->field($model, 'intro')->textInput() ?>
-
-    
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
         </div>

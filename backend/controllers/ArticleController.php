@@ -19,6 +19,14 @@ use yii\web\Request;
 
 class ArticleController extends Controller
 {
+    public function actions()
+    {
+        return [
+            'upload' => [
+                'class' => 'kucha\ueditor\UEditorAction',
+            ]
+        ];
+    }
              public function actionIndex(){
              //    声明一个方法用来查看回收站
              $model = Article::find()->orderBy('id');
@@ -51,7 +59,6 @@ class ArticleController extends Controller
             $detail = ArticleDetail::findOne(['article_id'=>$id]);
                  $detail->delete();
         }
-
         if ($model->delete()) {
             return $this->redirect(['index']);
         }

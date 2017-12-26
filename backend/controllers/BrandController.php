@@ -11,6 +11,7 @@ namespace backend\controllers;
 
 use backend\filters\CheckFilter;
 use backend\models\Brand;
+use flyok666\qiniu\Qiniu;
 use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\Request;
@@ -24,7 +25,7 @@ class BrandController extends Controller
 //        return [[
 //            'class'=>CheckFilter::className()
 //        ]];
-//    }
+//
 //    声明一个添加数据的方法
     public function actionAdd(){
        $model = new Brand();
@@ -90,17 +91,30 @@ class BrandController extends Controller
     }
 //    声明一个单独上传文件的方法
     public function actionUpload(){
-         $img = UploadedFile::getInstanceByName('file');
-        $path = "images/brand/".uniqid().".".$img->extension;
-        if ($img->saveAs($path,false)) {
-              $row = [
-                  'code'=>0,
-                  'url'=>'/'.$path,
-                  'attachment'=>'/'.$path
-              ];
-            return json_encode($row);
-        }
+        $config = [
+            'accessKey' => 'EAd29Qrh05q78_cZhajAWcbB1wYCBLyHLqkanjOG',//AK
+            'secretKey' => '_R5o3ZZpPJvz8bNGBWO9YWSaNbxIhpsedbiUtHjW',//SK
+            'domain' => 'http://p1ht4b07w.bkt.clouddn.com',//临时域名
+            'bucket' => 'php0830',//空间名称
+            'area' => Qiniu::AREA_HUADONG//区域
+        ];
+
+//var_dump($_FILES);exit;
+        $qiniu = new Qiniu($config);
+//var_dump($qiniu);exit;
+        $key = time();//上传后的文件名  多文件上传有坑
+        $qiniu->uploadFile($_FILES['file']["tmp_name"], $key);//调用上传方法上传文件
+        $url = $qiniu->getLink($key);//得到上传后的地址
+        //返回的结果
+        $result = [
+            'code' => 0,
+            'url' => $url,
+            'attachment' => $url
+
+        ];
+        return json_encode($result);
     }
+
     /*
      *
      */
