@@ -76,4 +76,7 @@ class Category extends \yii\db\ActiveRecord
             'intro' => '介绍',
         ];
     }
+    public function getDepthName(){
+        return str_repeat('---',$this->depth).$this->name;
+    }
 }

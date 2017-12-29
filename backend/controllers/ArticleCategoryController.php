@@ -25,6 +25,7 @@ class ArticleCategoryController extends \yii\web\Controller
             'model' => $model,
         ]);
     }
+//    查看数据的方法
     public function actionIndex(){
         $model = ArticleCategory::find()->orderBy('sort');
         $count = $model->count();
@@ -32,6 +33,7 @@ class ArticleCategoryController extends \yii\web\Controller
         $modelList = $model->offset($pagination->offset)->limit($pagination->limit)->all();
         return $this->render('index',['models'=>$modelList,'pageObj'=>$pagination]);
     }
+//    修数据的方法
     public function actionEdit($id)
     {
         $model = ArticleCategory::findOne($id);
@@ -49,6 +51,7 @@ class ArticleCategoryController extends \yii\web\Controller
             'model' => $model,
         ]);
     }
+//    声明一个删除数据的方法
     public function actionDel($id){
         $model = ArticleCategory::findOne($id);
         if ($model->delete()) {

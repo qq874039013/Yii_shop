@@ -38,19 +38,23 @@ class ArticleController extends Controller
     public function actionAdd()
     {
         $model = new Article();
+        $detail = new ArticleDetail();
         $cate = ArticleCategory::find()->all();
         $request = new Request();
         if ($request->isPost) {
             $model->load($request->post());
             if ($model->validate()) {
                 if ($model->save()) {
+                                 $detail->load($request->post());
+                                $detail->article_id = $model->id;
+                    $detail->save();
                     \Yii::$app->session->setFlash('success', '添加成功');
                     return $this->redirect(['index']);
                 }
             }
         }
         return $this->render('add', [
-            'model' => $model,'cate'=>$cate
+            'model' => $model,'cate'=>$cate,'detail'=>$detail
         ]);
     }
     public function actionDel($id){
@@ -66,19 +70,21 @@ class ArticleController extends Controller
     public function actionEdit($id)
     {
         $model = Article::findOne($id);
+        $detail =ArticleDetail::findOne($id);
         $cate = ArticleCategory::find()->all();
         $request = new Request();
         if($request->isPost){
             $model->load($request->post());
+            $detail->load($request->post());
             if($model->validate()) {
-                if ($model->save()) {
-                    \Yii::$app->session->setFlash('success', '添加成功');
+                if ($model->save()&&$detail->save()) {
+                    \Yii::$app->session->setFlash('success', '编辑成功');
                     return $this->redirect(['index']);
                 }
             }
         }
         return $this->render('add', [
-            'model' => $model,'cate'=>$cate
+            'model' => $model,'cate'=>$cate,'detail'=>$detail
         ]);
     }
     public function actionWrite($id){

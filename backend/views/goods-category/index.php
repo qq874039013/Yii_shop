@@ -1,5 +1,6 @@
 <table class="table">
     <tr>
+        <td>选项</td>
         <td>编号</td>
         <td>商品分类</td>
         <td>上级分类</td>
@@ -11,8 +12,10 @@
     </tr>
     <?php foreach ($models as $model):?>
     <tr>
+        <td><C</td>
         <td><?=$model->id?></td>
         <td><?=$model->name?></td>
+
         <td><?=$model->parent_id?></td>
         <td><?=$model->left?></td>
         <td><?=$model->right?></td>

@@ -18,14 +18,9 @@
 <!--  --><?//=$models?>
 </span>
 </div>
-<?php
-$js = <<<EOF
-var j = 0;
-EOF;
-$this->registerJs($js);
-?>
 <script>
-    $("#span1").click()
-    var shu = <?=$models?>;
-    console.debug(shu);
+    var data = <?=$models?>;
+    for(var i in data){
+        console.debug("text:"+data[i].name );
+    }
 </script>

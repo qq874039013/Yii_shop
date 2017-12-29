@@ -45,7 +45,7 @@ $js = <<<EOF
  var treeObj = $.fn.zTree.getZTreeObj("w1");
     treeObj.expandAll(true);
 //    选中父节点
-var node = treeObj.getNodeByParam("id", $model->parent_id, null);
+var node = treeObj.getNodeByParam("id", "$model->parent_id", null);
 //给定默认样式
 treeObj.selectNode(node);
 EOF;

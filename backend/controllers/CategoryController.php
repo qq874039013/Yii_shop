@@ -12,7 +12,7 @@ class CategoryController extends \yii\web\Controller
     private $data;
     public function actionIndex()
     {
-        $models = Category::find()->orderBy('id');
+        $models = Category::find()->orderBy('tree,lft');
         $count = $models->count();
         $pagination = new Pagination(['totalCount' =>$count,'defaultPageSize' => 4 ]);
         $modelList = $models->offset($pagination->offset)->limit($pagination->limit)->all();
@@ -95,11 +95,11 @@ class CategoryController extends \yii\web\Controller
 //    }
     public function actionShow()
     {
-        $models = Category::find()->asArray()->orderBy('id');
-        $count = $models->count();
-        $pagination = new Pagination(['totalCount' =>$count,'defaultPageSize' => 4 ]);
-        $modelList = $models->offset($pagination->offset)->limit($pagination->limit)->all();
-        $modelList = Json::encode($modelList);
+        $models = Category::find()->asArray()->orderBy('id')->all();
+//        $count = $models->count();
+//        $pagination = new Pagination(['totalCount' =>$count,'defaultPageSize' => 4 ]);
+//        $modelList = $models->offset($pagination->offset)->limit($pagination->limit)->all();
+        $modelList = Json::encode($models);
         return $this->render('show',['models'=>$modelList]);
     }
 }

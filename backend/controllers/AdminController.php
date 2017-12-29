@@ -80,9 +80,9 @@ class AdminController extends Controller
         $request = new \yii\web\Request();
        if ($request->isPost) {
            $model->load($request->post());
+//           先验证用户名，后验证密码
            if ($pass = Admin::findOne(['username'=>$model->username])) {
-               if (\Yii::$app->security->validatePassword($model->password,$pass->password)) {
-
+               if (\Yii::$app->security->validatePassword($model->password,$pass->password)){
                    if (\Yii::$app->user->login($pass)) {
                        \Yii::$app->session->setFlash('success','登录成功');
                        return $this->redirect(['brand/index']);
@@ -101,6 +101,7 @@ class AdminController extends Controller
     /**
      * @return string
      */
+//    上传到七牛云的方法
     public function actionUpload(){
         $config = [
             'accessKey' => 'EAd29Qrh05q78_cZhajAWcbB1wYCBLyHLqkanjOG',//AK

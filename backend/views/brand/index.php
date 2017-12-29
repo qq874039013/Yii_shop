@@ -1,5 +1,5 @@
 <table class="table">
-    <a href=<?=\yii\helpers\Url::to(['add'])?> class="glyphicon glyphicon-plus btn"></a><a href=<?=\yii\helpers\Url::to(['brand/trash'])?> class="glyphicon glyphicon-trash btn"></a><a href=<?=\yii\helpers\Url::to(['brand/index'])?> class="glyphicon glyphicon-home btn"></a>
+    <a href=<?=\yii\helpers\Url::to(['add'])?> class="glyphicon glyphicon-plus btn btn-success"></a><a href=<?=\yii\helpers\Url::to(['brand/trash'])?> class="glyphicon glyphicon-trash btn btn-danger"></a><a href=<?=\yii\helpers\Url::to(['brand/index'])?> class="glyphicon glyphicon-home btn btn-info"></a>
 
     <tr>
         <td>品牌编号</td>
@@ -18,7 +18,7 @@
         <td><span <?php if($model->status==0){echo 'class="glyphicon glyphicon-remove"';}if($model->status==1){echo  'class="glyphicon glyphicon-ok"';}?>><?=STATUS[$model->status]?></span></td>
         <td><?=$model->sort?></td>
         <td><?=\yii\bootstrap\Html::img($model->logo,['width'=>50])?></td>
-        <td><a href=<?=\yii\helpers\Url::to(['brand/edit','id'=>$model->id])?> class="glyphicon glyphicon-edit btn"></a><a href=<?=\yii\helpers\Url::to(['brand/del','id'=>$model->id])?>  class="glyphicon glyphicon-remove-circle btn"></a><a href=<?=\yii\helpers\Url::to(['brand/add-trash','id'=>$model->id])?>  <?php  if($model->status==0){echo 'class="glyphicon glyphicon-upload btn"';}if($model->status==1){echo  'class="glyphicon glyphicon-download btn"';}?>></a></td>
+        <td><a href=<?=\yii\helpers\Url::to(['brand/edit','id'=>$model->id])?> class="glyphicon glyphicon-edit btn btn-primary"></a><a href=<?=\yii\helpers\Url::to(['brand/del','id'=>$model->id])?>  class="glyphicon glyphicon-remove-circle btn btn-warning"></a><a href=<?=\yii\helpers\Url::to(['brand/add-trash','id'=>$model->id])?>  <?php  if($model->status==0){echo 'class="glyphicon glyphicon-upload btn btn-success "';}if($model->status==1){echo  'class="glyphicon glyphicon-download btn btn-danger"';}?>></a></td>
     </tr>
     <?php endforeach;?>
 </table>
