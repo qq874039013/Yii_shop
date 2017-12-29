@@ -21,6 +21,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'stock') ?>
     <?= $form->field($model, 'sn') ->textInput(['placeholder'=>'如果不输入货号，自动填写'])?>
     <?=$form->field($model, 'logo')->widget('manks\FileInput', [
+
     ]);
     ?>
     <?=$form->field($model,'content')->widget('kucha\ueditor\UEditor',[]);?>
@@ -29,7 +30,7 @@ use yii\widgets\ActiveForm;
     'pick' => [
     'multiple' => true,
     ],
-    // 'server' => Url::to('upload/u2'),
+//     'server' =>\yii\helpers\Url::to('goods/up'),
     // 'accept' => [
     // 	'extensions' => 'png',
     // ],

@@ -21,8 +21,15 @@ use yii\widgets\ActiveForm;
 </div><!-- promotion-add -->
 <?php
 $js = <<<JS
-
+$(function() {
+    var model =$model->goods_id;
+  
+    $(model).each(function(i,v) {
+          console.dir(v);
+       $("#promotion-goods_id option:eq("+v+")").prop('selected',true);
+    })
+  })
 JS;
 
-
+$this->registerJs($js);
 ?>

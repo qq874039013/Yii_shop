@@ -14,9 +14,9 @@
             <td><?=$model->title?></td>
             <td><?=$model->start_time?></td>
             <td><?=$model->end_time?></td>
-            <td><?php $i = 0;  foreach ($model->pro as $val){
-                echo ++$i."号商品:".\backend\models\Goods::findOne($val->goods_id)->name.'&emsp;';
-                }?></td>
+<!--            <td>--><?php //$i = 0;  foreach ($model->pro as $val){
+//                echo ++$i."号商品:".\backend\models\Goods::findOne($val->goods_id)->name.'&emsp;';
+//                }?><!--</td>-->
 
         <td><a href="<?=\yii\helpers\Url::to(['edit','id'=>$model->id])?>" class="btn btn-success">编辑</a><a href="<?=\yii\helpers\Url::to(['del','id'=>$model->id])?>" class="btn btn-danger">删除</a></td>
         </tr>

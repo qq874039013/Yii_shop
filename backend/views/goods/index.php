@@ -1,5 +1,42 @@
+<div><div class="pull-left"><a href="<?=\yii\helpers\Url::to(['add'])?>" class="btn btn-success">添加</a></div><div class="pull-right"> <form class="form-inline">
+            <div class="form-group">
+                <div class="btn-group">
+                    <select class="form-control" size=""  name="status" value="<?=Yii::$app->request->get('status')?>">
+                        <option value="">
+                            请选择分类
+                        </option>
+                            <option value=0>
+                        下架
+                        </option>
+                        <option value=1>
+                            上架
+                        </option>
+                    </select>
+                </div>
+                <input type="text" class="form-control" size="2" name='minPrice' placeholder="最低价" value="<?=Yii::$app->request->get('minPrice')?>">
+            </div>
+            ---
+            <div class="form-group">
+                <input type="text" class="form-control" size="2" name='maxPrice' placeholder="最高价" value="<?=Yii::$app->request->get('maxPrice')?>">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" size="5" name='sn' placeholder="货号 名称" value="<?=Yii::$app->request->get('sn')?>">
+                <div class="btn-group">
+                    <select class="form-control" size=""  name="brands" value="<?=Yii::$app->request->get('brands')?>">
+                        <option value="">
+                            请选择分类
+                        </option>
+                        <?php foreach ($brands as $brand):?>
+                        <option value="<?=$brand->id?>">
+                            <?=$brand->name?>
+                        </option>
+                        <?php endforeach;?>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default">搜索</button>
+        </form></div></div>
 <table class="table">
-    <a href="<?=\yii\helpers\Url::to(['add'])?>" class="btn btn-success">添加</a>
     <tr>
         <td>编号</td>
         <td>商品名称</td>

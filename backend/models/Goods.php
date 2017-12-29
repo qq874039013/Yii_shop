@@ -28,6 +28,7 @@ class Goods extends \yii\db\ActiveRecord
      */
     public $goodsImg;
     public $content;
+    public $keywords;
     public static function tableName()
     {
         return '{{%goods}}';
@@ -41,7 +42,8 @@ class Goods extends \yii\db\ActiveRecord
         return [
             [['name', 'cate_id', 'is_on_sale', 'market_price', 'shop_price', 'stock', 'inputtime', 'logo', 'brand_id'], 'required'],
             [['is_on_sale', 'sort', 'stock', 'inputtime', 'brand_id'], 'integer'],
-            [['sn','goodsImg','content'],'safe'],
+            [['goodsImg','keywords','content'],'safe'],
+            [['sn'],'unique'],
             [['market_price', 'shop_price'], 'number'],
             [['name', 'cate_id', 'logo'], 'string', 'max' => 255],
         ];

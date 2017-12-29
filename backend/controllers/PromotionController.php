@@ -6,6 +6,7 @@ use backend\models\Goods;
 use backend\models\GoodsPromotion;
 use backend\models\Promotion;
 use yii\data\Pagination;
+use yii\helpers\Json;
 use yii\web\Request;
 
 class PromotionController extends \yii\web\Controller
@@ -48,7 +49,8 @@ class PromotionController extends \yii\web\Controller
 //  声明一个修改数据的方法
     public function actionEdit($id){
         $model = Promotion::findOne($id);
-        $model->goods_id = GoodsPromotion::find()->where(['promotion_id'=>$id])->all();
+        $row = GoodsPromotion::find()->where(['promotion_id'=>$id])->asArray()->all();
+        $model->goods_id = Json::encode($row);
         $goods = Goods::find()->all();
         $request = new Request();
         if($request->isPost){
