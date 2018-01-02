@@ -12,7 +12,7 @@ use yii\data\Pagination;
 use yii\web\Request;
 
 
-class GoodsController extends \yii\web\Controller
+class GoodsController extends BaseController
 {
     public function actions()
     {

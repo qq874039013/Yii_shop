@@ -19,9 +19,10 @@ return [
         ],
         'user' => [
             'identityClass' => \backend\models\Admin::className(),
+
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
-            'loginUrl' => 'admin/login'
+            'loginUrl' => ['admin/login']
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
@@ -46,7 +47,9 @@ return [
             'rules' => [
             ],
         ],
-
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
     ],
     'params' => $params,
 ];

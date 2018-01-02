@@ -6,7 +6,7 @@ use backend\models\ArticleCategory;
 use yii\data\Pagination;
 use yii\web\Request;
 
-class ArticleCategoryController extends \yii\web\Controller
+class ArticleCategoryController extends BaseController
 {
     public function actionAdd()
     {

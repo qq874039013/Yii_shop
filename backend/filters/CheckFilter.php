@@ -13,12 +13,11 @@ class CheckFilter extends ActionFilter
 {
     public function beforeAction($action)
     {
-//        return false;
         if(\Yii::$app->user->can($action->uniqueId)){
-
             return true;
-//            return
         }else{
+//              var_dump(\Yii::$app->user->identity->username);
+//              exit;
             throw new \yii\web\UnauthorizedHttpException('对不起，您现在还没获此操作的权限');
         }
     }

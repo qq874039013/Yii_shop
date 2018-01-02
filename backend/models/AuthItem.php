@@ -27,6 +27,13 @@ class AuthItem extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+//    声明一个属性用来储存角色
+    public $role;
+//    声明一个属性用来储存权限
+    public $pre=[];
+//    声明一个属性用来储存会员的id号；
+    public $adminId=[] ;
+    public $roles=[];
     public static function tableName()
     {
         return 'auth_item';
@@ -38,11 +45,8 @@ class AuthItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'type'], 'required'],
-            [['type', 'created_at', 'updated_at'], 'integer'],
-            [['description', 'data'], 'string'],
-            [['name', 'rule_name'], 'string', 'max' => 64],
-            [['rule_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthRule::className(), 'targetAttribute' => ['rule_name' => 'name']],
+            [['name'], 'unique'],
+            [['name', 'description','type','rule_name','data','created_at','updated_at','role','pre','adminId','roles'], 'safe'],
         ];
     }
 
@@ -52,9 +56,9 @@ class AuthItem extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'name' => 'Name',
+            'name' => '权限',
             'type' => 'Type',
-            'description' => 'Description',
+            'description' => '权限介绍',
             'rule_name' => 'Rule Name',
             'data' => 'Data',
             'created_at' => 'Created At',

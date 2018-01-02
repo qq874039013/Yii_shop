@@ -4,8 +4,7 @@ return [
     'domain' => 'admin.yii.cn/',
     'webuploader' => [
         // 后端处理图片的地址，value 是相对的地址
-        'uploadUrl' => '/admin/upload',
-        // 多文件分隔符
+        'uploadUrl' => '/brand/upload',  // 多文件分隔符
         'delimiter' => ',',
         // 基本配置
         'baseConfig' => [

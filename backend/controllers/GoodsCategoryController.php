@@ -12,7 +12,7 @@ use yii\web\Request;
 /**
  * GoodsCategoryController implements the CRUD actions for GoodsCategory model.
  */
-class GoodsCategoryController extends Controller
+class GoodsCategoryController extends BaseController
 {
     private  $data;
   public function actionIndex(){

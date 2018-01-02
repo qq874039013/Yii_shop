@@ -17,7 +17,7 @@ use yii\db\DataReader;
 use yii\web\Controller;
 use yii\web\Request;
 
-class ArticleController extends Controller
+class ArticleController extends BaseController
 {
     public function actions()
     {

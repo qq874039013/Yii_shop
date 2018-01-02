@@ -6,18 +6,10 @@
  * Time: 13:44
  */
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
 
-use backend\filters\CheckFilter;
-use backend\models\Brand;
-use flyok666\qiniu\Qiniu;
-use yii\data\Pagination;
-use yii\web\Controller;
-use yii\web\Request;
-use yii\web\UploadedFile;
-
-class BrandController extends BaseController
+class BrandController extends Controller
 {
 ////    注入rbac
 //    public function behaviors()
@@ -102,7 +94,7 @@ class BrandController extends BaseController
 //var_dump($_FILES);exit;
         $qiniu = new Qiniu($config);
 //var_dump($qiniu);exit;
-        $key = uniqid();//上传后的文件名  多文件上传有坑
+        $key = time();//上传后的文件名  多文件上传有坑
         $qiniu->uploadFile($_FILES['file']["tmp_name"], $key);//调用上传方法上传文件
         $url = $qiniu->getLink($key);//得到上传后的地址
         //返回的结果

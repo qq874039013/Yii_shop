@@ -7,14 +7,14 @@ use yii\data\Pagination;
 use yii\helpers\Json;
 use yii\web\Request;
 
-class CategoryController extends \yii\web\Controller
+class CategoryController extends BaseController
 {
     private $data;
     public function actionIndex()
     {
         $models = Category::find()->orderBy('tree,lft');
         $count = $models->count();
-        $pagination = new Pagination(['totalCount' =>$count,'defaultPageSize' => 4 ]);
+        $pagination = new Pagination(['totalCount' =>$count,'defaultPageSize' => 20 ]);
         $modelList = $models->offset($pagination->offset)->limit($pagination->limit)->all();
         return $this->render('index',['models'=>$modelList,'pagObj'=>$pagination]);
     }
