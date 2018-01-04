@@ -3,6 +3,8 @@
 namespace backend\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
@@ -25,6 +27,27 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
      * @inheritdoc
      */
     public $rememberMe=true;
+    public function scenarios()
+    {
+        $parent=parent::scenarios();
+        return array_merge($parent,[
+            'create' => ['username', 'password', 'email','img'],
+            'login' => ['username', 'password', 'email','img'],
+            'update' => ['username', 'password', 'email','img'],
+        ]);
+    }
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['add_time'],
+                ]
+            ]
+        ];
+    }
+
     public static function tableName()
     {
         return '{{%admin}}';
@@ -36,11 +59,16 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'password', 'email'], 'required'],
-            [['token_create_time', 'add_time', 'last_login_time', 'last_login_ip','salt '], 'safe'],
-            ['email', 'match', 'pattern' => '/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ ','message' => '该邮箱不合法'],
+//            设置添加的时候，必须输入密码,修改的时候可以不输入密码
+            [['username'], 'required','on'=>['update']],
+            [['password','img','email'], 'safe','on'=>['update']],
 
-            [['username', 'email'], 'unique'],
+//            登录密码
+            [['password','username'],'required','on' => 'login'],
+            [['email','img'],'safe','on' => 'login'],
+            [['token_create_time', 'add_time', 'last_login_time', 'last_login_ip','salt '], 'safe'],
+            ['email', 'match', 'pattern' => '/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ ','message' => '该邮箱不合法','on' => 'create'],
+            [['username','password','email'], 'unique','on' => 'create'],
             [['rememberMe'],'safe'],
         ];
     }

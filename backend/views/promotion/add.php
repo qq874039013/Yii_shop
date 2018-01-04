@@ -4,32 +4,18 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Promotion */
+/* @var $model backend\models\Article */
 /* @var $form ActiveForm */
 ?>
-<div class="promotion-add">
-
-        <?php $form = ActiveForm::begin(); ?>
+<div class="article-add">
+    <?php $form = ActiveForm::begin(); ?>
+    <div class="col-md-6"><?= $form->field($model, 'start_time')->textInput(['type'=>'date']) ?></div>
+    <div class="col-md-6"> <?= $form->field($model, 'end_time') ->textInput(['type'=>'date'])?></div>
     <?=$form->field($model,'title')->widget('kucha\ueditor\UEditor',[]);?>
-        <?= $form->field($model, 'start_time') ?>
-        <?= $form->field($model, 'end_time') ?>
-       <?= $form->field($model, 'goods_id')->dropDownList(\yii\helpers\ArrayHelper::map($goods,'id','name'),['multiple'=>'multiple'])?>
+    <?=$form->field($model,'goods_id')->label('参与商品')->dropDownList(\yii\helpers\ArrayHelper::map($goods,'id','name'),['multiple'=>'multiple'])?>
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
         </div>
     <?php ActiveForm::end(); ?>
-</div><!-- promotion-add -->
-<?php
-$js = <<<JS
-$(function() {
-    var model =$model->goods_id;
-  
-    $(model).each(function(i,v) {
-          console.dir(v);
-       $("#promotion-goods_id option:eq("+v+")").prop('selected',true);
-    })
-  })
-JS;
 
-$this->registerJs($js);
-?>
+</div><!-- article-add -->

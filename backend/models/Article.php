@@ -22,6 +22,7 @@ class Article extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+//    public $content;
 // 创建自动更新时间
     public function behaviors()
     {
@@ -47,7 +48,7 @@ class Article extends \yii\db\ActiveRecord
         return [
             [['article_category_id'], 'required'],
             [['article_category_id', 'inputtime', 'status', 'sort'], 'integer'],
-            [['intro', 'name'], 'string', 'max' => 255],
+            [['intro', 'name'], 'safe'],
         ];
     }
 

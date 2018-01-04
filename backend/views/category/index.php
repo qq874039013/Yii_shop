@@ -2,6 +2,7 @@
 <table class="table">
     <a href=<?=\yii\helpers\Url::to(['add'])?> class="glyphicon glyphicon-plus btn btn-success"></a>
     <button id="allSelected" class="btn btn-success">全选</button><button id="selDel" class="btn btn-danger">选中删除</button><button id="all" class="btn btn-info">反选
+        <caption><h3>商品分类列表</h3></caption>
     <tr>
         <td></td>
         <td>编号</td>
@@ -11,7 +12,7 @@
     </tr>
     <?php foreach ($models as $model):?>
     <tr class="cate_tr" data_lft="<?=$model->lft?>" data_rgt="<?=$model->rgt?>" data_tree="<?=$model->tree?>">
-        <td ><input type="checkbox"></td>
+        <td><input type="checkbox"></td>
         <td title="id"><?=$model->id?></td>
         <td ><span  class="glyphicon glyphicon-eye-open"><?=$model->depthname?></span></td>
         <td><?=$model->intro?></td>

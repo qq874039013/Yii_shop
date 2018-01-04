@@ -16,7 +16,7 @@ class CheckFilter extends ActionFilter
         if(\Yii::$app->user->can($action->uniqueId)){
             return true;
         }else{
-//              var_dump(\Yii::$app->user->identity->username);
+//              var_dump(\Yii::$app->user->identity);
 //              exit;
             throw new \yii\web\UnauthorizedHttpException('对不起，您现在还没获此操作的权限');
         }

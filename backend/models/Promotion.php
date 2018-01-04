@@ -29,7 +29,7 @@ class Promotion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['start_time', 'end_time'], 'integer'],
+            [['start_time', 'end_time'], 'safe'],
             [['goods_id'],'safe'],
             [['title'], 'string', 'max' => 255],
         ];

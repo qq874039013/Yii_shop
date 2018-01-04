@@ -32,7 +32,7 @@ class GoodsController extends BaseController
         $brand = \Yii::$app->request->get('brands');
         $sn = \Yii::$app->request->get('sn');
         $status = \Yii::$app->request->get('status');
-
+//              搜索功能
        if($maxPrice){
                   $model->andWhere("shop_price<='$maxPrice'");
        }if($minPrice){

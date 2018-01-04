@@ -11,6 +11,15 @@ use yii\web\Request;
 
 class PromotionController extends BaseController
 {
+//    声明一个上传促销活动主题的方法
+    public function actions()
+    {
+        return [
+            'upload' => [
+                'class' => 'kucha\ueditor\UEditorAction',
+            ]
+        ];
+    }
 //    声明一个显示的方法
     public function actionIndex()
     {
@@ -49,11 +58,11 @@ class PromotionController extends BaseController
 //  声明一个修改数据的方法
     public function actionEdit($id){
         $model = Promotion::findOne($id);
-        $row = GoodsPromotion::find()->where(['promotion_id'=>$id])->asArray()->all();
-        $model->goods_id = Json::encode($row);
+       $model->goods_id = array_column(GoodsPromotion::find()->where(['promotion_id'=>$id])->asArray()->all(),'goods_id');
         $goods = Goods::find()->all();
         $request = new Request();
         if($request->isPost){
+
             if ($model->load($request->post())) {
                 $model->save(false);
                 foreach ($model->goods_id as $val){

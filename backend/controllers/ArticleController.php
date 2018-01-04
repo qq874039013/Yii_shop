@@ -27,16 +27,20 @@ class ArticleController extends BaseController
             ]
         ];
     }
+    //声明一个方法用来查看数据
              public function actionIndex(){
-             //    声明一个方法用来查看回收站
+             //
              $model = Article::find()->orderBy('id');
              $count = $model->count();
+//             实例化分页器
              $pagination = new Pagination(['totalCount' => $count,'defaultPageSize' => 2]);
              $modelList = $model->offset($pagination->offset)->limit($pagination->limit)->all();
              return $this->render('index',['models'=>$modelList,'pageObj'=>$pagination]);
          }
+//         添加数据的方法
     public function actionAdd()
     {
+//        双模型
         $model = new Article();
         $detail = new ArticleDetail();
         $cate = ArticleCategory::find()->all();
@@ -46,8 +50,9 @@ class ArticleController extends BaseController
             if ($model->validate()) {
                 if ($model->save()) {
                                  $detail->load($request->post());
+//                                 得到存入的article_id存入数据库
                                 $detail->article_id = $model->id;
-                    $detail->save();
+                                $detail->save();
                     \Yii::$app->session->setFlash('success', '添加成功');
                     return $this->redirect(['index']);
                 }
@@ -57,6 +62,7 @@ class ArticleController extends BaseController
             'model' => $model,'cate'=>$cate,'detail'=>$detail
         ]);
     }
+//    删除数据的方法
     public function actionDel($id){
               $model = Article::findOne($id);
         if (ArticleDetail::findOne(['article_id'=>$id])) {
@@ -67,6 +73,7 @@ class ArticleController extends BaseController
             return $this->redirect(['index']);
         }
     }
+//    修改数据的方法
     public function actionEdit($id)
     {
         $model = Article::findOne($id);
@@ -87,6 +94,7 @@ class ArticleController extends BaseController
             'model' => $model,'cate'=>$cate,'detail'=>$detail
         ]);
     }
+//    写入内容的方法
     public function actionWrite($id){
         $model = Article::findOne($id);
         if (ArticleDetail::findOne(['article_id'=>$id])) {

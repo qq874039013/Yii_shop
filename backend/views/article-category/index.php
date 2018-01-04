@@ -1,5 +1,6 @@
 <table class="table">
     <a href="<?=\yii\helpers\Url::to(['add'])?>" class="btn btn-success">添加</a>
+    <caption><h3>文章分类列表</h3></caption>
     <tr>
         <td>编号</td>
         <td>分类名称</td>

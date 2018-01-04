@@ -45,8 +45,8 @@ class AuthItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'unique'],
-            [['name', 'description','type','rule_name','data','created_at','updated_at','role','pre','adminId','roles'], 'safe'],
+            [['name','role'], 'unique'],
+            [['name', 'description','type','rule_name','data','created_at','updated_at','pre','adminId','roles'], 'safe'],
         ];
     }
 

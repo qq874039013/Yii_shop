@@ -37,6 +37,7 @@
             <button type="submit" class="btn btn-default">搜索</button>
         </form></div></div>
 <table class="table">
+    <caption><h3>商品列表</h3></caption>
     <tr>
         <td>编号</td>
         <td>商品名称</td>
@@ -59,7 +60,7 @@
             <td><?=$model->sort?></td>
             <td><?=$model->sn?></td>
             <td><?=$model->stock?></td>
-            <td><?=$model->cate->name?></td>
+            <td></td>
             <td><?=\yii\bootstrap\Html::img($model->logo,['height'=>50])?></td>
             <td><?=$model->brand->name?></td>
             <td><?=STATUS[$model->is_on_sale]?></td>

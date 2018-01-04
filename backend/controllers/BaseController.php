@@ -14,13 +14,13 @@ use yii\web\Controller;
 
 class BaseController extends Controller
 {
-////    注入过滤器
-  public function behaviors()
-  {
-      return [
-          [
-              'class'=>CheckFilter::className(),
-          ]
-      ];
-  }
+//////    注入过滤器
+//  public function behaviors()
+//  {
+//      return [
+//          [
+//              'class'=>CheckFilter::className(),
+//          ]
+//      ];
+//  }
 }

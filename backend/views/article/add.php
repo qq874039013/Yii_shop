@@ -11,23 +11,12 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'name') ?>
+
         <?= $form->field($model, 'article_category_id')->dropDownList(\yii\helpers\ArrayHelper::map($cate,'id','name')) ?>
         <?= $form->field($model, 'status')->radioList([0=>'下架',1=>'上架'],['value'=>1]) ?>
         <?= $form->field($model, 'sort') ->textInput(['value'=>100])?>
         <?= $form->field($model, 'intro')->textarea() ?>
-    <?php
-    echo $form->field($model, 'goodsimg')->widget('manks\FileInput', [
-        'clientOptions' => [
-            'pick' => [
-                'multiple' => true,
-            ],
-            // 'server' => Url::to('upload/u2'),
-            // 'accept' => [
-            // 	'extensions' => 'png',
-            // ],
-        ],
-    ]); ?>
-    <?=$form->field($model,'content')->widget('kucha\ueditor\UEditor',[]);?>
+    <?=$form->field($detail,'content')->widget('kucha\ueditor\UEditor',[]);?>
 
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>

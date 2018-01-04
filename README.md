@@ -36,21 +36,253 @@ ui人员 | 0
 
 ### 2.1.需求
 
- 品牌管理：
- 文章管理：
- 商品分类管理：
- 商品管理：
- 账号管理：
- 权限管理：
- 菜单管理：
- 订单管理：
+- [x]  品牌管理：
+- 品牌管理难点/上传图片  七牛云
+ ```
+ //    声明一个单独上传文件的方法
+    public function actionUpload(){
+        $config = [
+            'accessKey' => 'EAd29Qrh05q78_cZhajAWcbB1wYCBLyHLqkanjOG',//AK
+            'secretKey' => '_R5o3ZZpPJvz8bNGBWO9YWSaNbxIhpsedbiUtHjW',//SK
+            'domain' => 'http://p1ht4b07w.bkt.clouddn.com',//临时域名
+            'bucket' => 'php0830',//空间名称
+            'area' => Qiniu::AREA_HUADONG//区域
+        ];
+
+//var_dump($_FILES);exit;
+        $qiniu = new Qiniu($config);
+//var_dump($qiniu);exit;
+        $key = uniqid();//上传后的文件名  多文件上传有坑
+        $qiniu->uploadFile($_FILES['file']["tmp_name"], $key);//调用上传方法上传文件
+        $url = $qiniu->getLink($key);//得到上传后的地址
+        //返回的结果
+        $result = [
+            'code' => 0,
+            'url' => $url,
+            'attachment' => $url
+
+        ];
+        return json_encode($result);
+    }
+ ```
+- 删除图片的时候
+```
+//    声明一个删除的方法
+    public function actionDel($id)
+    {
+        $model = Brand::findOne($id);
+        if(file_exists(ltrim($model->logo,'/'))){
+            unlink(ltrim($model->logo,'/'));
+        }
+        if ($model->delete()) {
+          return $this->redirect(['index']);
+        }
+    }
+```
+ 
+- [x]  文章管理：
+- [x]  商品分类管理：
+- [x]  商品管理：
+- [x]  账号管理：
+- [x]  权限管理：
+RBAC
+基于权限的控制
+权限表 与角色表放置在一起 ，用type 的值来进行区分。type=1是角色，type=2 是权限
+
+增  | 删 | 改 | 查
+--- | --- |--- |---
+```
+实例化$auth =  \Yii::$app->authManager; 创建权限 
+$pre = $auth->createPermission($model->name); 
+添加描述
+  $pre->description=$model->description;
+  $auth->add($pre);
+  删
+    $auth = \Yii::$app->authManager;
+       $pre = $auth->getPermission($name);
+        if ($auth->remove($pre)
+        改
+        由于name是主键不能更改重复
+        只能更改描述 description 
+           $child = $auth->getPermission($val);
+           $child->decription = $model->description;
+                $auth->update($name,$child);
+            
+                查
+                 //    声明一个方法用来查看权限表
+        $model =\Yii::$app->authManager->getPermissions();
+
+        
+  ```
+角色表
+```
+实例化$auth =  \Yii::$app->authManager; 创建角色 
+$role = $auth->createRole($model->name); 
+添加描述
+  $role->description=$model->description;
+  $auth->add($role);
+  删
+    $auth = \Yii::$app->authManager;
+       $role = $auth->getRole($name);
+        if ($auth->remove($role)
+        改
+        由于name是主键不能更改重复
+        只能更改描述 description 
+           $child = $auth->getRole($val);
+           $child->decription = $model->description;
+                $auth->update($name,$child);
+                查
+                 //    声明一个方法用来查看权限表
+        $model =\Yii::$app->authManager->getRoles();
+  ```
+角色-权限表
+```
+实例化$auth =  \Yii::$app->authManager; 
+得到角色 
+$role = $auth->getRole($model->name); 
+$pre = $auth->getPremission($model->name);
+添加描述
+  $auth->addchild($role,$pre);
+  删
+     $auth = \Yii::$app->authManager;
+        $role = $auth->getRole($name);
+//        先删除角色对应的权限
+        $auth->removeChildren($role);
+//        然后在删除角色
+        if ($auth->remove($role)){
+        改先删除所有的角色对应的权限，然后在进行添加
+       //            判断角色是否存在
+            if($auth->getRole($model->role)==false){
+                $parent = $auth->getRole($name);
+            }else{
+                $parent = $auth->getRole($model->role);
+//                覆盖掉以前的角
+                 echo "<script>alert('是否要覆盖掉存在的角色')</script>";
+                $parent = $auth->getRole($model->role);
+                $parent2 = $auth->getRole($name);
+                //                先移除以前的角色对应的权限
+                $auth->removeChildren($parent2);
+                $auth->remove($parent2);
+            }
+            //                删除角色以前对应的权限
+            $auth->removeChildren($parent);
+//            在移除角色
+            $auth->remove($parent);
+
+//            重新创建角色
+            $role = $auth->createRole($model->role);
+//            添加描述
+            $role->description = $model->description;
+//            把角色添加进去
+            $auth->add($role);
+            $parent = $auth->getRole($model->role);
+            $auth->removeChildren($parent);
+            foreach ($model->pre as $val) {
+//                给角色添加权限
+                $child = $auth->getPermission($val);
+                $auth->addChild($parent,$child);
+            }
+                查
+                $model =\Yii::$app->authManager->getRoles();
+                <?php   $auth = Yii::$app->authManager;
+//        查看角色对应的权限
+             foreach ($auth->getChildren($model->name) as $val){
+                 echo $val->description.'----';
+             } ;
+        ?>
+        return $this->render('show',['models'=>$model]);
+         
+
+```
+角色-会员表
+  ```
+  增 给会员分配角色
+  $model = new AuthItem();
+//        得到所有的用户
+        $admin = Admin::find()->asArray()->all();
+        $admin = ArrayHelper::map($admin,'id','username');
+        $auth = \Yii::$app->authManager;
+//        得到所有的角色
+        $role = $auth->getRoles();
+        $role = ArrayHelper::map($role,'name','description');
+        $request = new Request();
+        if($request->isPost){
+            $model->load($request->post());
+//            得到角色
+            foreach ($model->adminId as $val){
+//                添加角色对应的用户
+                foreach ($model->roles as $v){
+                <!--先移除在进行添加不然会报错-->
+                 $role = $auth->getRole($v);
+                   $auth->revoke($role,$val);
+                    $auth->assign($role,$val);
+                }
+            }
+            \Yii::$app->session->setFlash('success',"添加会员到".$model->role."角色成功");
+            $this->refresh();
+        }
+        return $this->render('addadmin',['role'=>$role,'admin'=>$admin, 'model' => $model]);
+        删
+         $auth = \Yii::$app->authManager;
+          $role = $auth->getRole($item_name);
+        if ($auth->revoke($role,$user_id)) {
+            \Yii::$app->session->setFlash('success',"删除".$user_id."号会员对应".$item_name."角色成功");
+            return $this->redirect(['permission/show-admin']);
+        }
+ //把处理好的一维数组赋值给imgFiles属性
+        $model->imgFiles=array_column($goodsImgs,'path');
+  ```
+- [ ]  菜单管理：
+```
+设计菜单的数据表
+ public function up()
+    {
+        $this->createTable('menu', [
+            'id' => $this->primaryKey(),
+            'parent_id' => $this->integer()->comment('父级分类'),
+            'icon' => $this->string()->comment('样式'),
+            'url' => $this->string()->comment('路由'),
+            'label' => $this->string()->comment('菜单名称'),
+            'is_guest' => $this->integer()->defaultValue(1)->comment('是1否0会员'),
+        ]);
+    }
+  public static function menu()
+    {
+//        声明一个数组用来储存菜单列表
+        $newMenus = [];
+       $parent = self::find()->where(['parent_id'=>0])->all();
+//       遍历父级菜单
+        foreach ($parent as $menu) {
+            //分别赋值
+            $newMenu = [
+                'label' => $menu->label,
+                'icon' => $menu->icon,
+                'url' => '#',
+            ];
+            //循环当前分类的二级分类
+            foreach (self::find()->where(['parent_id' => $menu->id])->all() as $v) {
+                //给每个二级分类赋值
+                $newMenu['items'][] = [
+                    'label' => $v->label,
+                    'icon' => $v->icon,
+                    'url' => [$v->url]
+                ];
+            }
+            //把一级分类追加到数组中，没循环一次追加一次
+            $newMenus[]=$newMenu;
+        }
+        //返回
+        return $newMenus;
+        // return self::find()->all();
+    }
+```
+- [ ]  订单管理：
 ### 2.2.流程
 
 自动登录流程
 购物车流程
 订单流程
 ### 2.3.设计要点（数据库和页面交互）
-
 系统前后台设计：前台www.yiishop.com 后台admin.yiishop.com 对url地址美化
 商品无限级分类设计：
 购物车设计

@@ -108,8 +108,8 @@ class PermissionController extends Controller
                 $parent = $auth->getRole($name);
             }else{
                 $parent = $auth->getRole($model->role);
-//                覆盖掉以前的角色
-               echo "<script>alert('是否要覆盖掉存在的角色')</script>";
+//                覆盖掉以前的角
+                 echo "<script>alert('是否要覆盖掉存在的角色')</script>";
                 $parent = $auth->getRole($model->role);
                 $parent2 = $auth->getRole($name);
                 //                先移除以前的角色对应的权限
@@ -184,11 +184,11 @@ class PermissionController extends Controller
         if($request->isPost){
             $model->load($request->post());
 //            得到角色
-
             foreach ($model->adminId as $val){
 //                添加角色对应的用户
                 foreach ($model->roles as $v){
                     $role = $auth->getRole($v);
+                   $auth->revoke($role,$val);
                     $auth->assign($role,$val);
                 }
             }

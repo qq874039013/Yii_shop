@@ -14,10 +14,10 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'username') ?>
         <?= $form->field($model, 'password') ?>
          <?= $form->field($model, 'email') ?>
-
-    
+          <?=$form->field($model, 'img')->label('头像')->widget('manks\FileInput', [
+    ]); ?>
         <div class="form-group">
-            <?= Html::submitButton('注册', ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
         </div>
     <?php ActiveForm::end(); ?>
 
