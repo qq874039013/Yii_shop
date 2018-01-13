@@ -3,9 +3,17 @@
 @作者：diamondwang
 @时间：2013年11月14日
 */
-
+function update(id,num) {
+         $.getJSON('/cart/update-cart',{'id':id,'amount':num},function (data) {
+               console.dir(data);
+         })
+}
 $(function(){
-	
+    var total = 0;
+    $(".col5 span").each(function(){
+        total += parseFloat($(this).text());
+    });
+    $("#total").text(total.toFixed(2));
 	//减少
 	$(".reduce_num").click(function(){
 		var amount = $(this).parent().find(".amount");
@@ -14,6 +22,9 @@ $(function(){
 		} else{
 			$(amount).val(parseInt($(amount).val()) - 1);
 		}
+		var num = $(this).parent().find(".amount").val();
+		var id = $(this).parent().parent().attr('id');
+		update(id,num);
 		//小计
 		var subtotal = parseFloat($(this).parent().parent().find(".col3 span").text()) * parseInt($(amount).val());
 		$(this).parent().parent().find(".col5 span").text(subtotal.toFixed(2));
@@ -22,7 +33,6 @@ $(function(){
 		$(".col5 span").each(function(){
 			total += parseFloat($(this).text());
 		});
-
 		$("#total").text(total.toFixed(2));
 	});
 
@@ -40,8 +50,10 @@ $(function(){
 		});
 
 		$("#total").text(total.toFixed(2));
+        var num = $(this).parent().find(".amount").val();
+        var id = $(this).parent().parent().attr('id');
+        update(id,num);
 	});
-
 	//直接输入
 	$(".amount").blur(function(){
 		if (parseInt($(this).val()) < 1){
@@ -58,6 +70,8 @@ $(function(){
 		});
 
 		$("#total").text(total.toFixed(2));
-
+        var num = $(this).parent().find(".amount").val();
+        var id = $(this).parent().parent().attr('id');
+        update(id,num);
 	});
 });

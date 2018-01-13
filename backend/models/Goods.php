@@ -26,7 +26,7 @@ class Goods extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public $goodsImg;
+    public $goodsImg=[];
     public $content;
     public $keywords;
     public static function tableName()

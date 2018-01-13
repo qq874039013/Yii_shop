@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-responsive">
     <a href=<?=\yii\helpers\Url::to(['add'])?> class="glyphicon glyphicon-plus btn btn-success"></a><a href=<?=\yii\helpers\Url::to(['brand/trash'])?> class="glyphicon glyphicon-trash btn btn-danger"></a><a href=<?=\yii\helpers\Url::to(['brand/index'])?> class="glyphicon glyphicon-home btn btn-info"></a>
     <caption><h3>品牌列表</h3></caption>
     <tr>

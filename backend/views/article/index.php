@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-responsive ">
     <a href="<?=\yii\helpers\Url::to(['add'])?>" class="btn btn-success">添加</a>
     <caption><h3>文章列表</h3></caption>
     <tr>

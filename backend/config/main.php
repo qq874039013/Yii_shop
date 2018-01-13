@@ -15,7 +15,7 @@ return [
     'modules' => [
         'rbac' => [
             'class' => 'mdm\admin\Module',
-            'layout' => 'left-menu',
+//            'layout' => 'left-menu',
     ],],
         'as access' => [
             'class' => 'mdm\admin\components\AccessControl',

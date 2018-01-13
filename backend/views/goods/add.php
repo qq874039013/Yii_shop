@@ -8,7 +8,8 @@ use yii\widgets\ActiveForm;
 /* @var $form ActiveForm */
 ?>
 <div class="goods-add">
-    <div class="col-md-6"> <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(); ?>
+    <div class="col-md-6">
 
         <?= $form->field($model, 'name') ?>
         <?= $form->field($model, 'cate_id')->dropDownList(\yii\helpers\ArrayHelper::map($cate,'id','name'))?>

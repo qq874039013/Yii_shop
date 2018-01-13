@@ -112,6 +112,7 @@ use yii\helpers\Html;
                         <li class="header">You have 10 notifications</li>
                         <li>
                             <!-- inner menu: contains the actual data -->
+                            <!-- inner menu: contains the actual data -->
                             <ul class="menu">
                                 <li>
                                     <a href="#">
@@ -232,7 +233,7 @@ use yii\helpers\Html;
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="<?php
-                        if(\Yii::$app->user->identity){
+                        if(\Yii::$app->user->identity->img){
                             echo \Yii::$app->user->identity->img;}else{
                          echo $directoryAsset."/img/user2-160x160.jpg";
                         }

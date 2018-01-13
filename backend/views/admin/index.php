@@ -1,5 +1,5 @@
 <div class="pull-left"><a href="<?=\yii\helpers\Url::to(['add'])?>" class="btn btn-success">添加</a></div>
-<table class="table">
+<table class="table table-responsive ">
     <caption><h3>会员列表</h3></caption>
     <tr>
         <td>id</td>

@@ -4,6 +4,15 @@
 @时间：2013年11月14日
 */
 $(function(){
+    // 声明一个全局变量用来储存总的金额
+	var totalMoney=0;
+    // 声明一个全局变量用来储存总的金额+运费
+	var money=10.00;
+	$(".total").each(function (i,v) {
+       totalMoney+=parseInt($(v).text());
+    })
+	$("#totalAmount").text(totalMoney);
+	$("#amountAll,#amountAlls").text(totalMoney+parseInt(money));
 	//收货人修改
 	$("#address_modify").click(function(){
 		$(this).hide();
@@ -30,13 +39,12 @@ $(function(){
 	$("input[name=delivery]").click(function(){
 		$(this).parent().parent().addClass("cur").siblings().removeClass("cur");
 	});
-
-	//支付方式修改
-	$("#pay_modify").click(function(){
-		$(this).hide();
-		$(".pay_info").hide();
-		$(".pay_select").show();
-	})
+	//运费的更改，
+	$(".delivery_select table tr td input").click(function () {
+		 money = $(this).parent().parent().find('.money').text();
+		$("#freight").text(money);
+        $("#amountAll,#amountAlls").text(totalMoney+parseInt(money));
+    })
 
 	$("input[name=pay]").click(function(){
 		$(this).parent().parent().addClass("cur").siblings().removeClass("cur");

@@ -3,11 +3,11 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<title>成功提交订单</title>
-	<link rel="stylesheet" href="style/base.css" type="text/css">
-	<link rel="stylesheet" href="style/global.css" type="text/css">
-	<link rel="stylesheet" href="style/header.css" type="text/css">
-	<link rel="stylesheet" href="style/success.css" type="text/css">
-	<link rel="stylesheet" href="style/footer.css" type="text/css">
+	<link rel="stylesheet" href="/style/base.css" type="text/css">
+	<link rel="stylesheet" href="/style/global.css" type="text/css">
+	<link rel="stylesheet" href="/style/header.css" type="text/css">
+	<link rel="stylesheet" href="/style/success.css" type="text/css">
+	<link rel="stylesheet" href="/style/footer.css" type="text/css">
 </head>
 <body>
 	<!-- 顶部导航 start -->
@@ -35,7 +35,7 @@
 	<!-- 页面头部 start -->
 	<div class="header w990 bc mt15">
 		<div class="logo w990">
-			<h2 class="fl"><a href="index.html"><img src="images/logo.png" alt="京西商城"></a></h2>
+			<h2 class="fl"><a href="index.html"><img href="/images/logo.png" alt="京西商城"></a></h2>
 			<div class="flow fr flow3">
 				<ul>
 					<li>1.我的购物车</li>
@@ -82,10 +82,10 @@
 			 © 2005-2013 京东网上商城 版权所有，并保留所有权利。  ICP备案证书号:京ICP证070359号 
 		</p>
 		<p class="auth">
-			<a href=""><img src="images/xin.png" alt="" /></a>
-			<a href=""><img src="images/kexin.jpg" alt="" /></a>
-			<a href=""><img src="images/police.jpg" alt="" /></a>
-			<a href=""><img src="images/beian.gif" alt="" /></a>
+			<a href=""><img href="/images/xin.png" alt="" /></a>
+			<a href=""><img href="/images/kexin.jpg" alt="" /></a>
+			<a href=""><img href="/images/police.jpg" alt="" /></a>
+			<a href=""><img href="/images/beian.gif" alt="" /></a>
 		</p>
 	</div>
 	<!-- 底部版权 end -->

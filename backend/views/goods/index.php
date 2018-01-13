@@ -36,7 +36,7 @@
             </div>
             <button type="submit" class="btn btn-default">搜索</button>
         </form></div></div>
-<table class="table">
+<table class="table table-responsive">
     <caption><h3>商品列表</h3></caption>
     <tr>
         <td>编号</td>

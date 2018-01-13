@@ -55,16 +55,12 @@ $fieldOptions2 = [
 
         <div class="social-auth-links text-center">
             <p>- OR -</p>
-            <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> 登录
-                using Facebook</a>
-            <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i> 登录
-                in using Google+</a>
+            <a href="http://web2.qq.com/" class="btn btn-block btn-social btn-facebook btn-flat" style="width:200px;"><i class="fa fa-qq"></i>
+                using  &emsp; QQ</a>
+            <a href="https://wx.qq.com/" class="btn btn-block btn-social btn-google-plus btn-flat" style="width:200px;background-color: green"><i class="fa fa-weixin"></i>
+                 using &emsp; WeiXin</a>
         </div>
         <!-- /.social-auth-links -->
-
-        <a href="#">I forgot my password</a><br>
-        <a href="register.html" class="text-center">Register a new membership</a>
-
     </div>
     <!-- /.login-box-body -->
 </div><!-- /.login-box -->

@@ -1,5 +1,5 @@
 <?php /* @var $this yii\web\View */?>
-<table class="table">
+<table class="table table-responsive">
     <a href=<?=\yii\helpers\Url::to(['add'])?> class="glyphicon glyphicon-plus btn btn-success"></a>
     <button id="allSelected" class="btn btn-success">全选</button><button id="selDel" class="btn btn-danger">选中删除</button><button id="all" class="btn btn-info">反选
         <caption><h3>商品分类列表</h3></caption>

@@ -71,8 +71,10 @@ class GoodsController extends BaseController
 //              补齐四个0
                 $model->sn = date('Ymd', time()) . str_repeat('0', (4 - $length)) . ($count + 1);
             }
+
             if ($model->validate()) {
                 if ($model->save(false)) {
+
                     foreach ($model->goodsImg as $img) {
                         $gallery = new GoodsGallery();
                         $gallery->img = $img;
